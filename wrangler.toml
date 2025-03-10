@@ -20,4 +20,4 @@ class_name = "Chat"
 
 [[migrations]]
 tag = "v2"
-new_classes = ["Chat"]
+new_sqlite_classes = ["Chat"]

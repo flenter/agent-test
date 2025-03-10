@@ -4,7 +4,7 @@ import { Agent, type AgentNamespace } from "agents-sdk";
 // import { AIChatAgent } from "agents-sdk/ai-chat-agent";
 
 export type Env = {
-  chat: AgentNamespace<Chat>;
+  Chat: AgentNamespace<Chat>;
 };
 
 // Define your agent classes
