@@ -3,18 +3,39 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "dev": "wrangler dev src/index.ts",
+    "dev:wrangler": "wrangler dev src/server.ts",
+    "dev": "vite dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@cloudflare/vite-plugin": "^0.1.9",
+    "@tailwindcss/vite": "^4.0.12",
     "agents-sdk": "^0.0.27",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "hono": "^4.7.4",
     "hono-agents": "^0.0.17",
-    "typescript": "^5.8.2",
+    "lucide-react": "^0.479.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.0.2",
+    "tailwindcss-animate": "^1.0.7",
     "wrangler": "^3.112.0"
+  },
+  "devDependencies": {
+    "@shadcn/ui": "^0.0.4",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.12",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.1"
   }
 }
