@@ -1,0 +1,20 @@
+{
+  "name": "agent-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "agents-sdk": "^0.0.27",
+    "hono": "^4.7.4",
+    "hono-agents": "^0.0.17",
+    "typescript": "^5.8.2",
+    "wrangler": "^3.112.0"
+  }
+}
