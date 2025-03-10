@@ -5,8 +5,8 @@ export function App() {
     onMessage: (message) => {
       console.log(message);
     },
-    agent: 'chat',
-    // agent: "Chat",
+    // agent: 'chat',
+    agent: "chat",
 
     onOpen: () => console.log("Connection established"),
     onClose: () => console.log("Connection closed"),
