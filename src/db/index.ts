@@ -1,6 +1,6 @@
-import { drizzle } from 'drizzle-orm/d1';
-import { Hono } from 'hono';
-import * as schema from './schema';
+import { drizzle } from "drizzle-orm/d1";
+import type { Hono } from "hono";
+import * as schema from "./schema";
 
 // Define environment type for Hono
 type Bindings = {

@@ -1,6 +1,6 @@
-import type { Config } from 'drizzle-kit';
-import * as fs from 'fs';
-import * as path from 'path';
+import * as fs from "node:fs";
+import type { Config } from "drizzle-kit";
+import * as path from "node:path";
 
 const localD1DB = getLocalD1DB();
 console.log("localD1DB", localD1DB);
@@ -9,12 +9,12 @@ if (!localD1DB) {
 }
 
 const config: Config = {
-  schema: './src/db/schema',
-  out: './migrations',
-  dialect: 'sqlite',
+  schema: "./src/db/schema",
+  out: "./migrations",
+  dialect: "sqlite",
   dbCredentials: {
-    url: localD1DB
-  }
+    url: localD1DB,
+  },
 };
 
 export default config;

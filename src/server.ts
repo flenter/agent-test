@@ -1,13 +1,13 @@
 import { Hono } from "hono";
 import { agentsMiddleware } from "hono-agents";
-export { Chat } from "./Agent"
+export { Chat } from "./Agent";
 // import { ollama } from "ollama-ai-provider";
 
 interface Env {
-  GOOGLE_GENERATIVE_AI_API_KEY: string;
-  OPENAI_API_KEY: string;
-  Chat: DurableObjectNamespace<typeof Chat>;
-  DB: D1Database;
+	GOOGLE_GENERATIVE_AI_API_KEY: string;
+	OPENAI_API_KEY: string;
+	Chat: DurableObjectNamespace<typeof Chat>;
+	DB: D1Database;
 }
 // export class AssistantAgent extends Agent {
 //   async onRequest(request) {
@@ -38,12 +38,12 @@ app.use("*", agentsMiddleware());
 
 // With custom routing
 app.use(
-  "*",
-  agentsMiddleware({
-    options: {
-      prefix: "agents", // Handles /agents/* routes only
-    },
-  })
+	"*",
+	agentsMiddleware({
+		options: {
+			prefix: "agents", // Handles /agents/* routes only
+		},
+	}),
 );
 
 export default app;

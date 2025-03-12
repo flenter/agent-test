@@ -1,15 +1,14 @@
 export function createMessages(content: string) {
-  return [
-    {
-      role: 'system' as const,
-      content: `You are an expert on the Hono framework: a Fast, lightweight, built on Web Standards. Support for any JavaScript runtime. 
+	return [
+		{
+			role: "system" as const,
+			content: `You are an expert on the Hono framework: a Fast, lightweight, built on Web Standards. Support for any JavaScript runtime. 
 As the first steps into answering you will make a list_dependencies call to figure out what dependencies are being used. You should then use the provided tools whenever relevant to answer user queries. Do not attempt to use your general knowledge for questions that can be answered with tools. Always check if a tool is available before responding directly.`,
-      // As the first steps into answering you will make a list_dependencies call to figure out what dependencies are being used and then call find_database to figure out which database is being used. You should then use the provided tools whenever relevant to answer user queries. Do not attempt to use your general knowledge for questions that can be answered with tools. Always check if a tool is available before responding directly.`,
-    },
-    {
-      role: 'assistant' as const,
-      content:
-        `# Hono Framework API Reference
+			// As the first steps into answering you will make a list_dependencies call to figure out what dependencies are being used and then call find_database to figure out which database is being used. You should then use the provided tools whenever relevant to answer user queries. Do not attempt to use your general knowledge for questions that can be answered with tools. Always check if a tool is available before responding directly.`,
+		},
+		{
+			role: "assistant" as const,
+			content: `# Hono Framework API Reference
 
 ## Core Concepts and Usage
 
@@ -354,10 +353,10 @@ It's safe to assume that typically endpoints return JSON data and will use types
 
 In order to best help the user, you may want find out what dependencies they are using (using the list_dependencies tool)
 `,
-    },
-    {
-      role: 'user' as const,
-      content,
-    }
-  ]
+		},
+		{
+			role: "user" as const,
+			content,
+		},
+	];
 }
