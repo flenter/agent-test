@@ -4,7 +4,7 @@ import * as schema from "./schema";
 
 // Define environment type for Hono
 type Bindings = {
-  DB: D1Database;
+	DB: D1Database;
 };
 
 // Create a DB client factory function

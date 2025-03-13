@@ -76,7 +76,15 @@ const tools: ToolSet = {
 	// "find_database": FindDatabase,
 };
 // Define your agent classes
-export class Chat extends Agent<Env> {
+export class Chat extends Agent<
+	Env,
+	{
+		messageReceived: string;
+	}
+> {
+	initialState = {
+		messageReceived: "none",
+	};
 	private apiKey: string;
 	// Override constructor so we can store the `GOOGLE_GENERATIVE_AI_API_KEY` env var
 	constructor(ctx: AgentContext, env: Env) {
@@ -97,7 +105,7 @@ export class Chat extends Agent<Env> {
 	private _model: LanguageModelV1 | null = null;
 	private _openai: OpenAIProvider | null = null;
 	async onStart() {
-		console.log("Agent started");
+		console.log("Agent started", this.state);
 
 		this._openai = createOpenAI({
 			apiKey: this.apiKey,
@@ -122,6 +130,9 @@ export class Chat extends Agent<Env> {
 			message.toString(),
 		);
 		connection.send(JSON.stringify("ACK"));
+		this.setState({
+			messageReceived: "yes",
+		});
 
 		if (this._model) {
 			const params: GenerateTextParams = {

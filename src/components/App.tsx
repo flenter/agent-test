@@ -1,69 +1,51 @@
-import { useAgent } from "agents-sdk/react";
+import {
+	useAgent as useSdkAgent,
+	type UseAgentOptions,
+} from "agents-sdk/react";
 import { useCallback, useEffect, useState } from "react";
 import { Button } from "./ui/button";
 
-export function App() {
-	const [_connected, setConnected] = useState(false);
-	const agent = useAgent({
-		onMessage: (message: WebSocketEventMap["message"]) => {
-			console.log("message", message);
-			if (message.data === JSON.stringify("ACK")) {
-				console.log("ACK received");
-			}
-			// message.target?.send(JSON.stringify('ACK'));
-		},
-		// agent: 'chat',
-		agent: "chat",
+import { useQuery } from "@tanstack/react-query";
+import type { DurableObjectsResult, DurableObjectsSuccess } from "@/api/utils";
+import { AgentDetails } from "./AgentDetails/AgentDetails";
 
-		onOpen: (event) => {
-			console.log("Connection established");
-			setConnected(true);
-		},
-		onClose: () => console.log("Connection closed"),
-		onStateUpdate: (state) => console.log("State updated", state),
-		onError: (error) => console.error(error),
+const unset = Symbol("unset");
+
+function useListAgents() {
+	return useQuery<DurableObjectsResult>({
+		queryKey: ["list_agents"],
+		queryFn: () => fetch("/fp-agents/api/agents").then((res) => res.json()),
 	});
+}
 
-	const { readyState } = agent;
+export function App() {
+	const { data, isLoading } = useListAgents();
+	console.log("data", data);
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 
-	console.log("party", readyState);
-	// const ref = useRef(party);
-	// const close = useCallback(() => {
-	//   console.log('closing')
-	//   ref.current.close();
-	// }, [ref]);
-	const close = useCallback(() => agent.close(), [agent.close]);
-	const closeConnection =
-		readyState === WebSocket.OPEN ? () => agent.close() : undefined;
-	useEffect(() => {
-		if (!closeConnection) {
-			return;
-		}
-
-		return () => {
-			closeConnection();
-		};
-	}, [closeConnection]);
+	if (!data?.success) {
+		return <div>Empty</div>;
+	}
 
 	return (
-		<div>
-			{" "}
-			hello world
-			{readyState === WebSocket.CONNECTING && <div>Connecting...</div>}
-			{readyState === WebSocket.OPEN && <div>Connected!</div>}
-			{readyState === WebSocket.CLOSING && <div>Closing...</div>}
-			{readyState === WebSocket.CLOSED && <div>Closed!</div>}
-			<div className="grid gap-2 grid-cols-2">
-				<Button
-					className="cursor-pointer"
-					onClick={() => {
-						agent.send(JSON.stringify("I want a list user endpoint"));
-					}}
-				>
-					Send
-				</Button>
-				<Button onClick={close}>Close</Button>
+		<div className="h-full w-full grid gap-4 grid-cols-[200px_auto]">
+			<div className="grid gap-2">
+				<h1 className="text-lg px-2">Agents</h1>
+
+				{data.durableObjects.bindings.map((agent) => (
+					<AgentDetails key={agent.name} agent={agent} />
+				))}
 			</div>
 		</div>
 	);
+}
+
+// const
+
+// A component to render any type of state
+// It basically just JSON.stringify's the state
+function State({ state }: { state: unknown }) {
+	return <pre>{JSON.stringify(state, null, 2)}</pre>;
 }

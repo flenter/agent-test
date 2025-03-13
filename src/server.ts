@@ -1,14 +1,9 @@
 import { Hono } from "hono";
 import { agentsMiddleware } from "hono-agents";
 export { Chat } from "./Agent";
+import Api from "./api";
 // import { ollama } from "ollama-ai-provider";
 
-interface Env {
-	GOOGLE_GENERATIVE_AI_API_KEY: string;
-	OPENAI_API_KEY: string;
-	Chat: DurableObjectNamespace<typeof Chat>;
-	DB: D1Database;
-}
 // export class AssistantAgent extends Agent {
 //   async onRequest(request) {
 //     return new Response("I'm your AI assistant.");
@@ -35,6 +30,8 @@ app.use("*", agentsMiddleware());
 
 // // With error handling
 // app.use("*", agentsMiddleware({ onError: (error) => console.error(error) }));
+
+// app.route("/fp-agents", Api)
 
 // With custom routing
 app.use(
